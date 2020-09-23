@@ -12,10 +12,9 @@ const ExpenseSchema = new Schema({
     category: Schema.Types.ObjectId
 })
 
-ExpenseSchema.methods = {
-    newFromJson: (json) => {
+ExpenseSchema.methods.newFromJson = function(json) {
         this.status = json.Status
-        console.log('parsing a date', json )
+        console.log('parsing a date', this )
         this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
         this.debit = parseFloat(json.Debit)
         this.credit = parseFloat(json.Credit)
@@ -23,7 +22,6 @@ ExpenseSchema.methods = {
         this.category = json.category
         this.save(err => console.log(err))
         return this
-    }
 }
 
 module.exports = mongoose.model('Expense', ExpenseSchema)

@@ -6,10 +6,11 @@ const createDoc = (rec, Model) => {
     console.log(rec)
     csv()
     .fromFile(rec)
-    .then((jsonObj)=>{
-      console.log(jsonObj)
-      model = new Model
-      console.log(model.newFromJson(jsonObj))
+    .then((jsonAr)=>{
+      jsonAr.forEach( jsonObj => {
+        model = new Model
+        console.log(model.newFromJson(jsonObj))
+      })
     })
 }
 
