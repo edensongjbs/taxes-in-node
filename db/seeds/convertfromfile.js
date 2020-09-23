@@ -1,18 +1,19 @@
 const csvFilePath='./csv/last-year-2019.csv'
-const csv=require('csvtojson')
+// const csv=require('csvtojson')
 
 const fs = require('fs');
 const path = './'
 // print(path)
 
-async function print(path) {
+const createDocsFromDir = async (path, callBack, Model) => {
   const dir = await fs.promises.opendir(path)
   for await (const dirent of dir) {
-    if (!dirent.isDirectory()) {console.log(dirent) }
+    if (!dirent.isDirectory()) {callBack(path+dirent.name, Model) }
   }
 }
-print(path).catch(console.error);
+;
 
+module.exports = createDocsFromDir
 
 // csv()
 // .fromFile(csvFilePath)
