@@ -10,10 +10,15 @@ const ExpenseSchema = new Schema({
     credit: Schema.Types.Decimal128,
     business: Boolean,
     category: Schema.Types.ObjectId,
-    paymentSource: Schema.Types.ObjectId
+    paymentSource: Schema.Types.ObjectId,
+    notes:String
 })
 
 ExpenseSchema.methods.setCategory = function(json) {
+
+}
+
+ExpenseSchema.methods.setPaymentSource = function(json) {
 
 }
 
@@ -25,6 +30,7 @@ ExpenseSchema.methods.newFromJson = function(json) {
         this.business = json.business
         this.category = this.setCategory(json.category)
         this.paymentSource = this.setPaymentSource(json.paymentSource)
+        this.notes = json.notes
         this.save()
         return this
 }
