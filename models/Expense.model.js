@@ -8,6 +8,7 @@ const ExpenseSchema = new Schema({
     description: String,
     debit: Schema.Types.Decimal128,
     credit: Schema.Types.Decimal128,
+    coeff:{type: Schema.Types.Decimal128, default:1.0},
     business: Boolean,
     category: Schema.Types.ObjectId,
     paymentSource: Schema.Types.ObjectId,
@@ -31,6 +32,7 @@ ExpenseSchema.methods.newFromJson = function(json) {
         this.category = this.setCategory(json.category)
         this.paymentSource = this.setPaymentSource(json.paymentSource)
         this.notes = json.notes
+        this.coeff = json.coeff || 1.0
         this.save()
         return this
 }
