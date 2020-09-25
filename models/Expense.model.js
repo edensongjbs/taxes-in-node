@@ -14,13 +14,13 @@ const ExpenseSchema = new Schema({
 
 ExpenseSchema.methods.newFromJson = function(json) {
         this.status = json.Status
-        console.log('parsing a date', this )
+        // console.log('parsing a date', this )
         this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
         this.debit = parseFloat(json.Debit)
         this.credit = parseFloat(json.Credit)
         this.business = json.business
         this.category = json.category
-        this.save(err => console.log(err))
+        this.save()
         return this
 }
 

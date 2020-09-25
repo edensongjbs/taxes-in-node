@@ -1,4 +1,4 @@
-const csvFilePath='./csv/last-year-2019.csv'
+// const csvFilePath='./csv/last-year-2019.csv'
 // const csv=require('csvtojson')
 
 const fs = require('fs');
