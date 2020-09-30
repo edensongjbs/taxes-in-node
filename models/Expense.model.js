@@ -18,11 +18,11 @@ const ExpenseSchema = new Schema({
 })
 
 ExpenseSchema.methods.setCategory = function(json) {
-
+    return ExpenseType.findOne({categoryChar:json})
 }
 
 ExpenseSchema.methods.setPaymentSource = function(json) {
-
+    return PaymentSource.findOne({paymentChar:json})
 }
 
 ExpenseSchema.methods.newFromJson = function(json) {
