@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const date = require('date-and-time')
+const ExpenseType = require('./ExpenseType.model')
+const PaymentSource = require('./PaymentSource.model')
 
 const ExpenseSchema = new Schema({
     status:String,
