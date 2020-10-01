@@ -3,6 +3,7 @@ const csv=require('csvtojson')
 
 
 const createDoc = (rec, Model) => {
+    console.log('made it', rec, Model)
     console.log(rec)
     csv()
     .fromFile(rec)

@@ -10,7 +10,7 @@ const ExpenseTypeSchema = new Schema({
 
 
 
-ExpenseSchema.methods.newFromJson = function(json) {
+ExpenseTypeSchema.methods.newFromJson = function(json) {
         this.categoryName = json.categoryName
         this.categoryChar = json.categoryChar
         this.save()
