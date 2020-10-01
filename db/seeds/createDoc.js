@@ -3,14 +3,16 @@ const csv=require('csvtojson')
 
 
 const createDoc = (rec, Model) => {
-    console.log('made it', rec, Model)
     console.log(rec)
     csv()
     .fromFile(rec)
     .then((jsonAr)=>{
+      // console.log(jsonAr)
       jsonAr.forEach( jsonObj => {
-        model = new Model
-        console.log(model.newFromJson(jsonObj))
+        console.log("outside method...", jsonObj.category)
+        // model = new Model
+        // const mod = model.newFromJson(jsonObj)
+        // console.log(mod)
       })
     })
 }
