@@ -7,4 +7,4 @@ const subdir = 'payment-sources/'
 
 createDocsFromDir(dbInfo.path+subdir, createDoc, PaymentSource).catch(console.error)
 
-dbInfo.mongoose.disconnect()
+// dbInfo.mongoose.disconnect()

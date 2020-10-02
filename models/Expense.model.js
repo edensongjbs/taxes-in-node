@@ -18,14 +18,19 @@ const ExpenseSchema = new Schema({
 })
 
 ExpenseSchema.methods.setCategory = function(json) {
+
     console.log('inside set category', json)
-    console.log(ExpenseType.findOne({categoryChar:json}), 'grrrrr')
-    return ExpenseType.findOne({categoryChar:json})._id || null
+    
+    ExpenseType.findOne({categoryChar:json}, (err, cat) => {
+        this.updateOne({category:cat}, () => console.log('completed', cat || err))
+    })._id
 }
 
 ExpenseSchema.methods.setPaymentSource = function(json) {
     console.log('inside setPaymentSource', json)
-    return PaymentSource.findOne({paymentChar:json})._id || null
+    PaymentSource.findOne({paymentChar:json}, (err, source) => {
+        this.updateOne({paymentSource:source}, () => console.log('completed', source || err))
+    })
 }
 
 ExpenseSchema.methods.setBusinessBoolean = function(json) {
@@ -38,8 +43,8 @@ ExpenseSchema.methods.newFromJson = function(json) {
         this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
         this.debit = parseFloat(json.Debit) || parseFloat(json.Credit)
         this.business = this.setBusinessBoolean(json.business)
-        this.category = this.setCategory(json.category)
-        this.paymentSource = this.setPaymentSource(json.paymentSource)
+        this.setCategory(json.category)
+        this.setPaymentSource(json.paymentSource)
         this.notes = json.notes
         this.coeff = json.coeff || 1.0
         console.log(this, json)

@@ -7,4 +7,4 @@ const subdir = 'expense-types/'
 
 createDocsFromDir(dbInfo.path+subdir, createDoc, ExpenseType).catch(console.error)
 
-dbInfo.mongoose.disconnect()
+// dbInfo.mongoose.disconnect()
