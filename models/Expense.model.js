@@ -9,7 +9,6 @@ const ExpenseSchema = new Schema({
     date: Date,
     description: String,
     debit: Schema.Types.Decimal128,
-    credit: Schema.Types.Decimal128,
     coeff:{type: Schema.Types.Decimal128, default:1.0},
     business: Boolean,
     category: {type:Schema.Types.ObjectId, ref: 'ExpenseType'},
@@ -18,8 +17,6 @@ const ExpenseSchema = new Schema({
 })
 
 ExpenseSchema.methods.setCategory = function(json) {
-
-    console.log('inside set category', json)
     
     ExpenseType.findOne({categoryChar:json}, (err, cat) => {
         this.updateOne({category:cat}, () => console.log('completed', cat || err))
@@ -27,7 +24,7 @@ ExpenseSchema.methods.setCategory = function(json) {
 }
 
 ExpenseSchema.methods.setPaymentSource = function(json) {
-    console.log('inside setPaymentSource', json)
+
     PaymentSource.findOne({paymentChar:json}, (err, source) => {
         this.updateOne({paymentSource:source}, () => console.log('completed', source || err))
     })
@@ -38,8 +35,8 @@ ExpenseSchema.methods.setBusinessBoolean = function(json) {
 }
 
 ExpenseSchema.methods.newFromJson = function(json) {
+        if (json.business==="FALSE"){return}
         this.status = json.Status
-        console.log('inside the method...', json )
         this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
         this.debit = parseFloat(json.Debit) || parseFloat(json.Credit)
         this.business = this.setBusinessBoolean(json.business)
