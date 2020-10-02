@@ -49,4 +49,17 @@ ExpenseSchema.methods.newFromJson = function(json) {
         return this
 }
 
+ExpenseSchema.statics.sumCategory = function(catChar) {
+    console.log('line 1 of method')
+    ExpenseType.accessByChar(catChar, (err, category) => {
+        console.log(err, category)
+        this.find({category}, (err, expenseArr) => {
+            console.log(err, expenseArr)
+            console.log(`the total is:`, expenseArr.reduce( (sum, exp) => {
+                return sum+exp.coeff*exp.debit                
+            })
+        )}
+    )}
+)}
+
 module.exports = mongoose.model('Expense', ExpenseSchema)

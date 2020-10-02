@@ -17,4 +17,14 @@ ExpenseTypeSchema.methods.newFromJson = function(json) {
         return this
 }
 
-module.exports = mongoose.model('ExpenseType', ExpenseTypeSchema)
+ExpenseTypeSchema.statics.accessByChar = (catChar, callBack) => {
+    console.log(catChar)
+    ExpenseType.findOne({categoryChar:catChar}, (e, i) => {
+        console.log('inside callback', e, i)
+        callBack(e, i)
+    })
+}
+
+
+const ExpenseType = mongoose.model('ExpenseType', ExpenseTypeSchema)
+module.exports = ExpenseType 
