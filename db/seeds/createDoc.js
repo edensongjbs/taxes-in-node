@@ -10,9 +10,9 @@ const createDoc = (rec, Model) => {
       // console.log(jsonAr)
       jsonAr.forEach( jsonObj => {
         console.log("outside method...", jsonObj.category)
-        // model = new Model
-        // const mod = model.newFromJson(jsonObj)
-        // console.log(mod)
+        model = new Model
+        const mod = model.newFromJson(jsonObj)
+        console.log(mod)
       })
     })
 }

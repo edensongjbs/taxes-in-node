@@ -19,7 +19,7 @@ const ExpenseSchema = new Schema({
 
 ExpenseSchema.methods.setCategory = function(json) {
     console.log('inside set category', json)
-    debugger
+    console.log(ExpenseType.findOne({categoryChar:json}), 'grrrrr')
     return ExpenseType.findOne({categoryChar:json})._id || null
 }
 
@@ -35,15 +35,16 @@ ExpenseSchema.methods.setBusinessBoolean = function(json) {
 ExpenseSchema.methods.newFromJson = function(json) {
         this.status = json.Status
         console.log('inside the method...', json )
-        // this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
-        // this.debit = parseFloat(json.Debit) || parseFloat(json.Credit)
-        // this.business = this.setBusinessBoolean(json.business)
-        // this.category = this.setCategory(json.category)
-        // this.paymentSource = this.setPaymentSource(json.paymentSource)
-        // this.notes = json.notes
-        // this.coeff = json.coeff || 1.0
-        // this.save()
-        // return this
+        this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
+        this.debit = parseFloat(json.Debit) || parseFloat(json.Credit)
+        this.business = this.setBusinessBoolean(json.business)
+        this.category = this.setCategory(json.category)
+        this.paymentSource = this.setPaymentSource(json.paymentSource)
+        this.notes = json.notes
+        this.coeff = json.coeff || 1.0
+        console.log(this, json)
+        this.save()
+        return this
 }
 
 module.exports = mongoose.model('Expense', ExpenseSchema)
