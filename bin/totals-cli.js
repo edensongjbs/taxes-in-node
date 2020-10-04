@@ -9,7 +9,7 @@ const readline = require('readline').createInterface({
 thePrompt = () => {
     readline.question('Which category do you want to total?', input => {
         if (input==="exit") {process.exit()}
-        Expense.sumCategory(input)
+        Expense.sumCategory(input, thePrompt)
         // console.log('howdy!!!')
         // thePrompt()
     })

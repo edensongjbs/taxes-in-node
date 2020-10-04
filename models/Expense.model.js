@@ -49,7 +49,7 @@ ExpenseSchema.methods.newFromJson = function(json) {
         return this
 }
 
-ExpenseSchema.statics.sumCategory = function(catChar) {
+ExpenseSchema.statics.sumCategory = function(catChar, callBack) {
     // console.log('line 1 of method')
     ExpenseType.accessByChar(catChar, (err, category) => {
         // console.log(err, category)
@@ -57,8 +57,9 @@ ExpenseSchema.statics.sumCategory = function(catChar) {
             // console.log(err, expenseArr)
             lineItems = expenseArr.map(doc => doc.coeff*doc.debit)
             console.log(lineItems)
-            console.log(`the total is:`, lineItems.reduce( (sum=0, exp) => sum+exp)
-        )}
+            console.log(`the total is:`, lineItems.reduce( (sum, exp) => sum+exp))
+            callBack()
+        }
     )}
 )}
 
