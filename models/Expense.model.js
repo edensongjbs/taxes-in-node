@@ -44,20 +44,20 @@ ExpenseSchema.methods.newFromJson = function(json) {
         this.setPaymentSource(json.paymentSource)
         this.notes = json.notes
         this.coeff = json.coeff || 1.0
-        console.log(this, json)
+        // console.log(this, json)
         this.save()
         return this
 }
 
 ExpenseSchema.statics.sumCategory = function(catChar) {
-    console.log('line 1 of method')
+    // console.log('line 1 of method')
     ExpenseType.accessByChar(catChar, (err, category) => {
-        console.log(err, category)
+        // console.log(err, category)
         this.find({category}, (err, expenseArr) => {
-            console.log(err, expenseArr)
-            console.log(`the total is:`, expenseArr.reduce( (sum, exp) => {
-                return sum+exp.coeff*exp.debit                
-            })
+            // console.log(err, expenseArr)
+            lineItems = expenseArr.map(doc => doc.coeff*doc.debit)
+            console.log(lineItems)
+            console.log(`the total is:`, lineItems.reduce( (sum=0, exp) => sum+exp)
         )}
     )}
 )}

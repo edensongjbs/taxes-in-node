@@ -18,9 +18,9 @@ ExpenseTypeSchema.methods.newFromJson = function(json) {
 }
 
 ExpenseTypeSchema.statics.accessByChar = (catChar, callBack) => {
-    console.log(catChar)
+    // console.log(catChar)
     ExpenseType.findOne({categoryChar:catChar}, (e, i) => {
-        console.log('inside callback', e, i)
+        // console.log('inside callback', e, i)
         callBack(e, i)
     })
 }
