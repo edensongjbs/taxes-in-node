@@ -37,6 +37,7 @@ ExpenseSchema.methods.setBusinessBoolean = function(json) {
 ExpenseSchema.methods.newFromJson = function(json) {
         if (json.business==="FALSE"){return}
         this.status = json.Status
+        this.description = json.Description
         this.date = new Date(date.parse(json.Date, 'MM/DD/YYYY'))
         this.debit = parseFloat(json.Debit) || parseFloat(json.Credit)
         this.business = this.setBusinessBoolean(json.business)
@@ -53,7 +54,8 @@ ExpenseSchema.statics.sumCategory = function(catChar, callBack) {
     // console.log('line 1 of method')
     ExpenseType.accessByChar(catChar, (err, category) => {
         // console.log(err, category)
-        this.find({category}, (err, expenseArr) => {
+        console.log('The Categoryyyyy is:', category)
+        Expense.find({category}, (err, expenseArr) => {
             // console.log(err, expenseArr)
             lineItems = expenseArr.map(doc => doc.coeff*doc.debit)
             console.log(lineItems)
@@ -63,4 +65,6 @@ ExpenseSchema.statics.sumCategory = function(catChar, callBack) {
     )}
 )}
 
-module.exports = mongoose.model('Expense', ExpenseSchema)
+const Expense = mongoose.model('Expense', ExpenseSchema)
+
+module.exports = Expense

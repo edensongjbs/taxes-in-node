@@ -21,6 +21,7 @@ ExpenseTypeSchema.statics.accessByChar = (catChar, callBack) => {
     // console.log(catChar)
     ExpenseType.findOne({categoryChar:catChar}, (e, i) => {
         // console.log('inside callback', e, i)
+        console.log('You have selected category:', i)
         callBack(e, i)
     })
 }
